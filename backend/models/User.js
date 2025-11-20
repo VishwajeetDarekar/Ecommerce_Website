@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require("bcryptjs");
+
 
 const cartItemSchema = new mongoose.Schema({
   product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
