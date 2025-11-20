@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Orders</title>
+    <link rel="stylesheet" href="orders.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+    <script src="config.js"></script>   <!-- ✅ Load config FIRST -->
+    <script>
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+
+    <h2>Your Orders</h2>
+
+    <div id="orders-box"></div>
+
+    <!-- Orders Script -->
+    <script src="orders.js"></script>
+
+</body>
+</html>

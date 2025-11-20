@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Details</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+        #image {
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- Load backend URL first -->
+    <script src="config.js"></script>
+
+    <script>
+    fetch("navbar.html")
+        .then(res => res.text())
+        .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+
+    <h2 id="name">Loading...</h2>
+    <img id="image" width="200">
+    <p id="price"></p>
+    <p id="desc"></p>
+
+<script>
+async function loadProduct() {
+    const id = new URLSearchParams(window.location.search).get("id");
+
+    const res = await fetch(`${BACKEND_URL}/api/products/${id}`);
+    const p = await res.json();
+
+    document.getElementById("name").innerText = p.name;
+    document.getElementById("image").src = p.image;
+    document.getElementById("price").innerText = "₹" + p.price;
+    document.getElementById("desc").innerText = p.description;
+}
+
+loadProduct();
+</script>
+
+</body>
+</html>
