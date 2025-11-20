@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="navbar"></div>
+
+<!-- Load backend URL first -->
+<script src="config.js"></script>
+
+<script>
+fetch("navbar.html")
+  .then(res => res.text())
+  .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
+
+<div class="center-box">
+    <h2>Login</h2>
+
+    <form id="form">
+        <input id="email" placeholder="Email or Mobile">
+        <input id="password" type="password" placeholder="Password">
+        <button class="yellow-btn">Continue</button>
+    </form>
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", async (e)=> {
+  e.preventDefault();
+
+  const res = await fetch(`${BACKEND_URL}/api/auth/login`, {  // <-- FIXED
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+      email: email.value,
+      password: password.value
+    })
+  });
+
+  const data = await res.json();
+
+  if(res.ok){
+      localStorage.setItem("token", data.token);
+      alert("Login success!");
+      location.href = "index.html";  // <-- frontend redirect
+  } else {
+      alert(data.msg);
+  }
+});
+</script>
+
+</body>
+</html>

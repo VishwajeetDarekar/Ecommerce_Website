@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div id="navbar"></div>
+
+<!-- Load backend URL first -->
+<script src="config.js"></script>
+
+<script>
+fetch("navbar.html")
+  .then(res => res.text())
+  .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
+
+<!-- CENTERED CARD -->
+<div class="center-box">
+    <h2>Create Account</h2>
+
+    <form id="form">
+        <input id="name" placeholder="Your Name">
+        <input id="email" placeholder="Email">
+        <input id="password" type="password" placeholder="Password">
+        <button class="yellow-btn">Create Account</button>
+    </form>
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const res = await fetch(`${BACKEND_URL}/api/auth/signup`, {   // <-- FIXED
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      name: name.value,
+      email: email.value,
+      password: password.value
+    })
+  });
+
+  const data = await res.json();
+
+  if(res.ok){
+      localStorage.setItem("token", data.token);
+      alert("Signup successful!");
+      window.location.href = "index.html";  // <-- FIXED
+  } else {
+      alert(data.msg);
+  }
+});
+</script>
+
+</body>
+</html>
