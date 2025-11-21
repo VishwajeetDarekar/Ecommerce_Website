@@ -8,32 +8,29 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
 const cartRoutes = require('./routes/cart');
+const orderRoutes = require('./routes/orders');
 
 const app = express();
-
-// CORS FIX – Allow Netlify frontend
-app.use(cors({
-    origin: "https://stellular-pegasus-982120.netlify.app",   // your Netlify domain
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
-}));
-
+app.use(cors());
 app.use(express.json());
 
-// Serve frontend (optional for local testing)
-app.use(express.static(path.join(__dirname, "../frontend")));
-
-// Connect MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.error(err));
-
-// API ROUTES (correct prefix)
+// ⭐ API ROUTES
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
-app.use('/api/orders', require('./routes/orders'));
+app.use('/api/orders', orderRoutes);
 
-// Render port setup
+// ⭐ Serve frontend for Netlify or local use
+app.use(express.static(path.join(__dirname, "../frontend")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+});
+
+// ⭐ FIX PORT FOR RENDER
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log("Server running on port " + PORT));
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.error(err));
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
