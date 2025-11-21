@@ -31,7 +31,7 @@ fetch("navbar.html")
 document.getElementById("form").addEventListener("submit", async (e)=> {
   e.preventDefault();
 
-  const res = await fetch(`${BACKEND_URL}/api/auth/login`, {  // <-- FIXED
+  const res = await fetch(`${API_URL}/api/auth/login`, {  // <-- FIXED
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body: JSON.stringify({
