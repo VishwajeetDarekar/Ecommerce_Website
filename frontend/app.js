@@ -3,7 +3,7 @@ console.log("API URL =", API_URL);
 
 // LOAD ALL PRODUCTS
 async function loadProducts() {
-    const res = await fetch(`${API_URL}/products`);   // FIXED
+    const res = await fetch(`${API_URL}/api/products`);   // FIXED
     const products = await res.json();
     const container = document.getElementById("products");
 
@@ -30,7 +30,7 @@ async function addToCart(id){
         return;
     }
 
-    const res = await fetch(`${API_URL}/cart/add`, {   // FIXED
+    const res = await fetch(`${API_URL}/api/cart/add`, {   // FIXED
         method:"POST",
         headers:{
             "Content-Type":"application/json",
