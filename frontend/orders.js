@@ -2,7 +2,7 @@ async function loadOrders() {
     const token = localStorage.getItem("token");
     if (!token) return alert("Please login first!");
 
-    const res = await fetch(`${API_URL}/api/orders`, {
+    const res = await fetch(`${API_URL}/orders`, {
         headers: { "Authorization": "Bearer " + token }
     });
 
