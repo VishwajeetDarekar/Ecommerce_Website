@@ -14,20 +14,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ⭐ API ROUTES
+// API ROUTES
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 
-// ⭐ Serve frontend for Netlify or local use
-app.use(express.static(path.join(__dirname, "../frontend")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
-});
-
-// ⭐ FIX PORT FOR RENDER
+// FIX PORT FOR RENDER
 const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB connected"))
