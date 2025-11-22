@@ -38,7 +38,7 @@
 async function loadProduct() {
     const id = new URLSearchParams(window.location.search).get("id");
 
-    const res = await fetch(`${API_URL}/api/products/${id}`);
+    const res = await fetch(`${API_URL}/products/${id}`);
     const p = await res.json();
 
     document.getElementById("name").innerText = p.name;
