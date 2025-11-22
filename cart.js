@@ -36,7 +36,7 @@ async function loadCart() {
 async function removeItem(id){
     const token = localStorage.getItem("token");
 
-    await fetch(`${BACKEND_URL}/api/cart/remove`, {
+    await fetch(`${API_URL}/cart/remove`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
