@@ -51,7 +51,7 @@ async function removeItem(id){
 document.getElementById("checkout-btn").addEventListener("click", async () => {
     const token = localStorage.getItem("token");
 
-    const res = await fetch(`${BACKEND_URL}/api/orders/place`, {
+    const res = await fetch(`${BACKEND_URL}/orders/place`, {
         method: "POST",
         headers: { "Authorization": "Bearer " + token }
     });
