@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- NAVBAR -->
 <div id="navbar"></div>
 
-<!-- Load backend URL first -->
 <script src="config.js"></script>
-
 <script>
 fetch("navbar.html")
   .then(res => res.text())
   .then(data => document.getElementById("navbar").innerHTML = data);
 </script>
 
-<!-- CENTERED CARD -->
-<div class="center-box">
+<div class="auth-box">
     <h2>Create Account</h2>
 
     <form id="form">
-        <input id="name" placeholder="Your Name">
-        <input id="email" placeholder="Email">
-        <input id="password" type="password" placeholder="Password">
-        <button class="yellow-btn">Create Account</button>
+        <input id="name" class="input" placeholder="Your Name">
+        <input id="email" class="input" placeholder="Email">
+        <input id="password" type="password" class="input" placeholder="Password">
+
+        <button class="btn auth-btn">Create Account</button>
     </form>
 </div>
 
@@ -49,7 +48,7 @@ document.getElementById("form").addEventListener("submit", async (e) => {
   if(res.ok){
       localStorage.setItem("token", data.token);
       alert("Signup successful!");
-      window.location.href = "index.html";  // <-- FIXED
+      location.href = "index.html";
   } else {
       alert(data.msg);
   }

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -8,22 +10,21 @@
 
 <div id="navbar"></div>
 
-<!-- Load backend URL first -->
 <script src="config.js"></script>
-
 <script>
 fetch("navbar.html")
   .then(res => res.text())
   .then(data => document.getElementById("navbar").innerHTML = data);
 </script>
 
-<div class="center-box">
+<div class="auth-box">
     <h2>Login</h2>
 
     <form id="form">
-        <input id="email" placeholder="Email or Mobile">
-        <input id="password" type="password" placeholder="Password">
-        <button class="yellow-btn">Continue</button>
+        <input id="email" class="input" placeholder="Email or Mobile">
+        <input id="password" type="password" class="input" placeholder="Password">
+
+        <button class="btn auth-btn">Continue</button>
     </form>
 </div>
 
@@ -31,13 +32,10 @@ fetch("navbar.html")
 document.getElementById("form").addEventListener("submit", async (e)=> {
   e.preventDefault();
 
-  const res = await fetch(`${API_URL}/auth/login`, {  
+  const res = await fetch(`${API_URL}/auth/login`, {
     method:"POST",
     headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({
-      email: email.value,
-      password: password.value
-    })
+    body: JSON.stringify({ email: email.value, password: password.value })
   });
 
   const data = await res.json();
@@ -45,7 +43,7 @@ document.getElementById("form").addEventListener("submit", async (e)=> {
   if(res.ok){
       localStorage.setItem("token", data.token);
       alert("Login success!");
-      location.href = "index.html";  // <-- frontend redirect
+      location.href = "index.html";
   } else {
       alert(data.msg);
   }

@@ -8,22 +8,31 @@
 </head>
 <body>
 
-    
     <div id="navbar"></div>
 
     <script src="config.js"></script>
     <script>
-    fetch("navbar.html")
-        .then(res => res.text())
-        .then(data => document.getElementById("navbar").innerHTML = data);
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
     </script>
 
-    
-    <h2 class="title">Featured Products</h2>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Premium Products for Everyone</h1>
+            <p>Discover the latest arrivals with a clean and modern shopping experience.</p>
+            <button onclick="location.href='#products'" class="shop-btn">Shop Now</button>
+        </div>
 
-    <div class="product-container" id="products">
-        <!-- Products will load here using app.js -->
-    </div>
+        <div class="hero-img">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30" alt="Hero">
+        </div>
+    </section>
+
+    <h2 class="section-title">Featured Products</h2>
+
+    <div class="product-container" id="products"></div>
 
     <script src="app.js"></script>
 </body>

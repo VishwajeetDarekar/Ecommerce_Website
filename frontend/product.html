@@ -1,44 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
-    <style>
-        body {
-            font-family: Arial;
-            padding: 20px;
-        }
-        #image {
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <div id="navbar"></div>
+<div id="navbar"></div>
 
-    <!-- Load backend URL first -->
-    <script src="config.js"></script>
+<script src="config.js"></script>
+<script>
+fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
 
-    <script>
-    fetch("navbar.html")
-        .then(res => res.text())
-        .then(data => document.getElementById("navbar").innerHTML = data);
-    </script>
+<section class="product-details">
+    <div class="product-image-box">
+        <img id="image">
+    </div>
 
-    <h2 id="name">Loading...</h2>
-    <img id="image" width="200">
-    <p id="price"></p>
-    <p id="desc"></p>
+    <div class="product-info-box">
+        <h1 id="name">Loading...</h1>
+        <p id="price" class="p-price"></p>
+        <p id="desc" class="p-desc"></p>
+
+        <button class="btn" id="addCart">Add to Cart</button>
+    </div>
+</section>
 
 <script>
-async function loadProduct() {
-    const id = new URLSearchParams(window.location.search).get("id");
+let productId = new URLSearchParams(window.location.search).get("id");
 
-    const res = await fetch(`${API_URL}/products/${id}`);
+async function loadProduct() {
+    const res = await fetch(`${API_URL}/products/${productId}`);
     const p = await res.json();
 
     document.getElementById("name").innerText = p.name;
@@ -46,6 +44,19 @@ async function loadProduct() {
     document.getElementById("price").innerText = "₹" + p.price;
     document.getElementById("desc").innerText = p.description;
 }
+
+document.getElementById("addCart").addEventListener("click", async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return alert("Please login first!");
+
+    await fetch(`${API_URL}/cart/add`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+        body: JSON.stringify({ productId })
+    });
+
+    alert("Added to cart!");
+});
 
 loadProduct();
 </script>

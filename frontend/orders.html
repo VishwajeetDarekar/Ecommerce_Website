@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Orders</title>
-    <link rel="stylesheet" href="orders.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <div id="navbar"></div>
-    <script src="config.js"></script>   
-    <script>
-        fetch("navbar.html")
-            .then(res => res.text())
-            .then(data => document.getElementById("navbar").innerHTML = data);
-    </script>
+<div id="navbar"></div>
 
-    <h2>Your Orders</h2>
+<script src="config.js"></script>
+<script>
+fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
 
-    <div id="orders-box"></div>
+<h2 class="section-title">Your Orders</h2>
 
-    <!-- Orders Script -->
-    <script src="orders.js"></script>
+<div id="orders-box" class="orders-container"></div>
+
+<script src="orders.js"></script>
 
 </body>
 </html>
