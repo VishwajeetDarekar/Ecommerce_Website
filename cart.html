@@ -1,35 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart</title>
-    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-    <!-- NAVBAR -->
-    <div id="navbar"></div>
+<div id="navbar"></div>
 
-    <!-- Load backend URL before any JS -->
-    <script src="config.js"></script>
+<script src="config.js"></script>
+<script>
+fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
 
-    <script>
-    fetch("navbar.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("navbar").innerHTML = data);
-    </script>
+<h2 class="section-title">Your Cart</h2>
 
-    <h2>Your Cart</h2>
-
+<div class="cart-wrapper">
     <div id="cart-container"></div>
 
-    <div id="summary-box">
+    <div class="cart-summary">
         <h3>Order Summary</h3>
         <p>Total Items: <span id="items-count">0</span></p>
         <p>Total Price: ₹<span id="total-price">0</span></p>
-        <button id="checkout-btn">Proceed to Buy</button>
+
+        <button id="checkout-btn" class="btn">Proceed to Buy</button>
     </div>
+</div>
 
-    <script src="cart.js"></script>
-
+<script src="cart.js"></script>
 </body>
 </html>

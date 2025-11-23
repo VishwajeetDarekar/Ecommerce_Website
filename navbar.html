@@ -1,27 +1,27 @@
-<header class="navbar">
-    <div class="logo" onclick="location.href='index.html'">MyStore</div>
-
-    <div class="search-bar">
-        <input type="text" id="search" placeholder="Search products...">
-        <button>Search</button>
+<header class="nav">
+    <div class="nav-left">
+        <div class="logo" onclick="location.href='index.html'">MyStore</div>
     </div>
 
-    <div class="nav-links" id="auth-links">
+    <div class="nav-center">
+        <input type="text" id="search" class="search" placeholder="Search products...">
+    </div>
+
+    <div class="nav-right" id="auth-links">
         <a href="signup.html">Sign Up</a>
         <a href="login.html" id="loginLink">Login</a>
         <a href="orders.html">Orders</a>
-        <a href="cart.html">Cart 🛒</a>
+        <a href="cart.html" class="cart-icon">🛒</a>
     </div>
 </header>
-
 
 <script>
 function updateNavbarAuth() {
     const token = localStorage.getItem("token");
     const loginLink = document.getElementById("loginLink");
 
-    if(token){
-        loginLink.innerText = "Logout";
+    if (token) {
+        loginLink.textContent = "Logout";
         loginLink.href = "#";
         loginLink.onclick = () => {
             localStorage.removeItem("token");
@@ -30,55 +30,5 @@ function updateNavbarAuth() {
         };
     }
 }
-
 updateNavbarAuth();
 </script>
-
-<style>
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 25px;
-    background-color: #0f1111;
-    color: white;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff9900;
-    cursor: pointer;
-}
-
-.search-bar {
-    display: flex;
-    width: 40%;
-}
-
-.search-bar input {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px 0 0 5px;
-    border: none;
-}
-
-.search-bar button {
-    padding: 8px 15px;
-    background-color: #ff9900;
-    border: none;
-    cursor: pointer;
-    border-radius: 0 5px 5px 0;
-}
-
-.nav-links a {
-    margin-left: 20px;
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.nav-links a:hover {
-    color: #ff9900;
-}
-</style>
